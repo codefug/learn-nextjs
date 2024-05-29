@@ -1,10 +1,10 @@
-import Link from "next/link";
+import SearchForm from "@/widgets/SearchForm";
 
 export default function Home() {
   return (
     <main className="bg-indigo-600">
       <p className="text-white">hi</p>
-      <Link href="/search">Search Page</Link>
+      <SearchForm />
     </main>
   );
 }
