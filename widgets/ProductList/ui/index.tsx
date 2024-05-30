@@ -1,23 +1,11 @@
-import instance from "@/shared/api";
-import { MultiProduct, Product } from "@/shared/api/types";
+import { Product } from "@/shared/api/types";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-export function ProductList() {
-  const [products, setProducts] = useState<Product[]>();
+interface Props {
+  products: Product[];
+}
 
-  async function getMultiProduct() {
-    const res = await instance.get("/products/");
-    const products: MultiProduct = res?.data;
-    setProducts(products.results);
-  }
-
-  useEffect(() => {
-    getMultiProduct();
-  }, []);
-
-  if (!products) return;
-
+export function ProductList({ products }: Props) {
   return (
     <div className="grid grid-cols-4 gap-4">
       {products.map((product) => (
@@ -26,7 +14,11 @@ export function ProductList() {
             <div className="*:text-white">
               <h1>{product.name}</h1>
               <h2>{product.englishName}</h2>
-              <img src={product.imgUrl} alt={product.englishName} />
+              <img
+                className="rounded-md"
+                src={product.imgUrl}
+                alt={product.englishName}
+              />
               <section>{product.price}</section>
               <div>{product.starRating}</div>
             </div>

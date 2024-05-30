@@ -18,8 +18,8 @@ export default function ProductPage() {
 
   async function getSizeReviews(targetId: string) {
     const res = await instance.get(`/size_reviews?product_id=${targetId}`);
-    const nextReview: MultiReview = res?.data;
-    setReviews(nextReview.results);
+    const nextReview: Review[] | [] = res.data.results ?? [];
+    setReviews(nextReview);
   }
 
   useEffect(() => {
@@ -31,11 +31,10 @@ export default function ProductPage() {
     }
   }, [id]);
 
-  if (!product) return null;
+  if (!product || !reviews) return null;
 
   return (
     <>
-      <Header />
       <div>
         <h1>{product.name}</h1>
         <img src={product.imgUrl} alt={product.name} />
