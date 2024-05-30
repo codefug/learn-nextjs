@@ -1,34 +1,26 @@
-import instance from "@/shared/api";
-import { MultiProduct, Product } from "@/shared/api/types";
+import { Product } from "@/shared/api/types";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-export function ProductList() {
-  const [products, setProducts] = useState<Product[]>();
+interface Props {
+  items?: Product[];
+}
 
-  async function getMultiProduct() {
-    const res = await instance.get("/products/");
-    const products: MultiProduct = res?.data;
-    setProducts(products.results);
-  }
-
-  useEffect(() => {
-    getMultiProduct();
-  }, []);
-
-  if (!products) return;
+export function ItemsList({ items }: Props) {
+  if (!items) return;
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      {products.map((product) => (
-        <Link key={product.id} href={`/products/${product.id}`}>
+      {items.map((item) => (
+        <Link key={item.id} href={`/products/${item.id}`}>
           <figure>
             <div className="*:text-white">
-              <h1>{product.name}</h1>
-              <h2>{product.englishName}</h2>
-              <img src={product.imgUrl} alt={product.englishName} />
-              <section>{product.price}</section>
-              <div>{product.starRating}</div>
+              <img
+                src={item.imgUrl}
+                alt={item.englishName}
+                className="rounded-lg"
+              />
+              <h1>{item.name}</h1>
+              <section>{item.price}</section>
             </div>
           </figure>
         </Link>
