@@ -5,9 +5,8 @@ interface Props {
   items?: Product[];
 }
 
-export function ItemsList({ items }: Props) {
+export function ProductList({ items }: Props) {
   if (!items) return;
-
   return (
     <div className="grid grid-cols-4 gap-4">
       {items.map((item) => (

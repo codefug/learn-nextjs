@@ -25,7 +25,6 @@ export default function Home() {
         <title>lsh-clothes</title>
         <link rel="github" href="/githubIcon.png" />
       </Head>
-      <Header />
       <main className="bg-indigo-600">
         <p className="text-white">hi</p>
         <SearchForm />
